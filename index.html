@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Game</title>
+  <style>
+  #game-Canvas{
+
+  }
+  </style>
+</head>
+<body>
+  <canvas id="game-Canvas" width="800" height="600" align="center"></canvas>
+  <script>
+    var canvas, canvasContext;
+
+    var w = window.innerWidth || document.body.clientWidth;
+    var h = window.innerHeight || document.body.clientHeight;
+
+
+    window.onload = function(){
+
+      canvas = document.getElementById('game-Canvas');
+      canvasContext = canvas.getContext('2d');
+
+      canvasContext.fillStyle = "black";
+      canvasContext.fillRect(0,0, canvas.width, canvas.height);
+
+      canvasContext.fillStyle = "white";
+      canvasContext.beginPath();
+      canvasContext.arc(100,100, 10, 0,Math.PI*2, true);
+      canvasContext.fill();
+
+    }
+  </script>
+
+</body>
+</html>
