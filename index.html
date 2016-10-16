@@ -14,12 +14,13 @@
   <script>
    /*Variables*/
     var canvas, canvasContext;
+    var ballX = 35;
+    var ballY = 35;
+    var ballSpeedX = 5;
+    var ballSpeedY = 7;
 
-    var w = window.innerWidth || document.body.clientWidth;
-    var h = window.innerHeight || document.body.clientHeight;
-
-    var framesPerSecond = 30;
-    setInterval(updateAll, 1000/framesPerSecond);
+    // var w = window.innerWidth || document.body.clientWidth;
+    // var h = window.innerHeight || document.body.clientHeight;
 
    /*Functions*/
     window.onload = function(){
@@ -27,12 +28,32 @@
       canvas = document.getElementById('game-Canvas');
       canvasContext = canvas.getContext('2d');
 
+      var framesPerSecond = 30;
+      setInterval(updateAll, 1000/framesPerSecond);
+      
+    }
+    function updateAll(){
+      ballX += ballSpeedX;
+      if(ballX > canvas.width){
+        ballSpeedX *= -1;
+      }
+      if(ballX < 0){
+        ballSpeedX *= -1;
+      }
+      ballY += ballSpeedY;
+      if(ballY > canvas.height){
+        ballSpeedY *= -1;
+      }
+      if(ballY < 0){
+        ballSpeedY *= -1;
+      }
+
       canvasContext.fillStyle = "black";
       canvasContext.fillRect(0,0, canvas.width, canvas.height);
 
       canvasContext.fillStyle = "white";
       canvasContext.beginPath();
-      canvasContext.arc(100,100, 10, 0,Math.PI*2, true);
+      canvasContext.arc(ballX,ballY, 10, 0,Math.PI*2, true);
       canvasContext.fill();
     }
 
