@@ -12,6 +12,7 @@
 <body>
   <canvas id="game-Canvas" width="800" height="600" align="center"></canvas>
   <script>
+
    /*Variables*/
     var canvas, canvasContext;
     var ballSpeedX = 5;
@@ -52,6 +53,7 @@
           ballSpeedY *= -1;
         }
       }
+
     function draw(){
       fillCanvas("black", 0,0,800,800);
 
@@ -68,8 +70,6 @@
         canvasContext.arc(centerX, centerY, radius, 0*Math.PI, Math.PI*2, true);
         canvasContext.fill();
       }
-
-
 
   </script>
 
