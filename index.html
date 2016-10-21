@@ -20,17 +20,16 @@
     var ballX = 50;
     var ballY = 50;
 
-    const PADDLE_THICKNESS = 10;
-    const PADDLE_WIDTH = 100;
+    const PADDLE_THICKNESS = 15;
+    const PADDLE_WIDTH = 120;
+    const PADDLE_DIST_FROM_EDGE = 60;
     var paddleX;
-
 
    /*Functions*/
     window.onload = function(){
 
       var framesPerSecond = 30;
       setInterval(updateAll, 1000/framesPerSecond);
-
       canvas = document.getElementById('game-Canvas');
       canvasContext = canvas.getContext('2d');
 
@@ -38,14 +37,16 @@
       var canvasW = canvas.width;
 
       canvas.addEventListener("mousemove", updateMousePos);
+
     }
 
     function updateMousePos(evt){
       var rect = canvas.getBoundingClientRect();
       var root = document.documentElement;
       var mouseX = evt.clientX - rect.left - root.scrollLeft;
-      var mouseY = evt.clentY - rect.top - root.scrollTop;
+      // var mouseY = evt.clentY - rect.top - root.scrollTop;
       paddleX = mouseX - PADDLE_WIDTH/2;
+      paddleX;
     }
 
     function updateAll(){
@@ -54,33 +55,50 @@
     }
 
     function move(){
-
       ballX += ballSpeedX;
-      if(ballX > canvas.width){
-        ballSpeedX *= -1;
-      }
+      ballY += ballSpeedY;
+
+      /*left*/
       if(ballX < 0){
         ballSpeedX *= -1;
       }
-
-      ballY += ballSpeedY;
-      if(ballY > canvas.height){
-        // ballSpeedY *= -1;
-        resetBall();
+      /*right*/
+      if(ballX > canvas.width){
+        ballSpeedX *= -1;
       }
+      /*top*/
       if(ballY < 0){
         ballSpeedY *= -1;
       }
+      /*bottom*/
+      if(ballY > canvas.height){
+        resetBall();
+      }
+
+      var paddleTopEdgeY = canvas.height - PADDLE_DIST_FROM_EDGE;
+      var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
+      var paddleLeftEdgeX = paddleX;
+      var paddleRightEdgeX = paddleLeftEdgeX + PADDLE_WIDTH;
+      if(ballY > paddleTopEdgeY &&
+         ballY < paddleBottomEdgeY &&
+         ballX > paddleLeftEdgeX &&
+         ballX < paddleRightEdgeX){
+        reflectBall();
+      }
+
     }
 
     function resetBall(){
-        var delay=500;
-        setTimeout(function() {
-          ballX = 100;
-          ballY = 100;
-        }, delay);
+      var delay=500;
+      setTimeout(function() {
+        ballX = 100;
+        ballY = 100;
+      }, delay);
     }
 
+    function reflectBall(){
+      ballSpeedY *= -1;
+    }
 
     function draw(){
       /*main Canvas*/
@@ -88,7 +106,7 @@
       /*ball*/
       ball("white", ballX, ballY, 10);
       /*paddle*/
-      fillRect("white", paddleX, canvas.height - PADDLE_THICKNESS, PADDLE_WIDTH, PADDLE_THICKNESS);
+      fillRect("white", paddleX, canvas.height - PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS);
     }
 
     function fillRect(colorCanvas, topLeftX, topLeftY, canvasWidth, canvasHeight){
