@@ -83,9 +83,13 @@
          ballY < paddleBottomEdgeY &&
          ballX > paddleLeftEdgeX &&
          ballX < paddleRightEdgeX){
-        reflectBall();
-      }
+         var bounceBack;
+         reflectBall(bounceBack);
 
+         var centerOfPaddleX = paddleX + PADDLE_WIDTH/2;
+         var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
+         ballSpeedX = ballDistFromPaddleCenterX * 0.35;
+      }
     }
 
     function resetBall(){
@@ -96,8 +100,10 @@
       }, delay);
     }
 
-    function reflectBall(){
+    function reflectBall(reflect){
       ballSpeedY *= -1;
+      var reflectBall = ballSpeedY;
+      return reflectBall;
     }
 
     function draw(){
