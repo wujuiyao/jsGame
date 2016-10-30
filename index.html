@@ -24,6 +24,8 @@
     const PADDLE_WIDTH = 120;
     const PADDLE_DIST_FROM_EDGE = 60;
     var paddleX;
+    var mouseX;
+    var mouseY;
 
    /*Functions*/
     window.onload = function(){
@@ -43,8 +45,9 @@
     function updateMousePos(evt){
       var rect = canvas.getBoundingClientRect();
       var root = document.documentElement;
-      var mouseX = evt.clientX - rect.left - root.scrollLeft;
-      // var mouseY = evt.clentY - rect.top - root.scrollTop;
+      mouseX = evt.clientX - rect.left - root.scrollLeft;
+      mouseY = evt.clientY - rect.top - root.scrollTop;
+
       paddleX = mouseX - PADDLE_WIDTH/2;
       paddleX;
     }
@@ -53,7 +56,7 @@
       move();
       draw();
     }
-
+    /*canvas move*/
     function move(){
       ballX += ballSpeedX;
       ballY += ballSpeedY;
@@ -106,6 +109,7 @@
       return reflectBall;
     }
 
+    /*canvas draw*/
     function draw(){
       /*main Canvas*/
       fillRect("black", 0,0,800,600);
@@ -113,6 +117,8 @@
       ball("white", ballX, ballY, 10);
       /*paddle*/
       fillRect("white", paddleX, canvas.height - PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS);
+      /*mouse coordinates*/
+      colorText("x:"+mouseX+", "+"y:"+mouseY, mouseX, mouseY, "yellow","11px Verdana");
     }
 
     function fillRect(colorCanvas, topLeftX, topLeftY, canvasWidth, canvasHeight){
@@ -125,6 +131,13 @@
       canvasContext.arc(centerX, centerY, radius, 0*Math.PI, Math.PI*2, true);
       canvasContext.fill();
     }
+
+    function colorText(textContent, textX, textY, colorContent, fontText){
+      canvasContext.font = fontText;
+      canvasContext.fillStyle = colorContent;
+      canvasContext.fillText(textContent, textX, textY);
+    }
+
   </script>
 
 </body>
