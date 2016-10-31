@@ -23,6 +23,8 @@
     const PADDLE_THICKNESS = 15;
     const PADDLE_WIDTH = 120;
     const PADDLE_DIST_FROM_EDGE = 60;
+    const BRICK_THICKNESS = 20;
+    const BRICK_WIDTH = 100;
     var paddleX;
     var mouseX;
     var mouseY;
@@ -119,6 +121,13 @@
       fillRect("white", paddleX, canvas.height - PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS);
       /*mouse coordinates*/
       colorText("x:"+mouseX+", "+"y:"+mouseY, mouseX, mouseY, "yellow","11px Verdana");
+      /*Bricks*/
+      drawBricks("blue", 10, 10, BRICK_WIDTH, BRICK_THICKNESS);
+    }
+
+    function drawBricks(colorBricks, topLeftX, topLeftY, canvasWidth, canvasHeight){
+      canvasContext.fillStyle = colorBricks;
+      canvasContext.fillRect(topLeftX, topLeftY, canvasWidth, canvasHeight);
     }
 
     function fillRect(colorCanvas, topLeftX, topLeftY, canvasWidth, canvasHeight){
