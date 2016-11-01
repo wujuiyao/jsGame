@@ -123,27 +123,37 @@
       /*mouse coordinates*/
       colorText("x:"+mouseX+", "+"y:"+mouseY, mouseX, mouseY, "yellow","11px Verdana");
       /*Bricks*/
-      drawBricks("blue", 0, 0, BRICK_WIDTH, BRICK_THICKNESS);
+      drawBricks("blue", 0, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", 0, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
+      drawBricks("blue", BRICK_WIDTH, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", BRICK_WIDTH, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
+      drawBricks("blue", BRICK_WIDTH*2, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", BRICK_WIDTH*2, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
+      drawBricks("blue", BRICK_WIDTH*3, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", BRICK_WIDTH*3, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
+      drawBricks("blue", BRICK_WIDTH*4, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", BRICK_WIDTH*4, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
+      drawBricks("blue", BRICK_WIDTH*5, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", BRICK_WIDTH*5, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
+      drawBricks("blue", BRICK_WIDTH*6, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", BRICK_WIDTH*6, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
+      drawBricks("blue", BRICK_WIDTH*7, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+      drawBricks("blue", BRICK_WIDTH*7, BRICK_THICKNESS, BRICK_WIDTH-2, BRICK_THICKNESS-2);
+
 
     }
 
 
     function drawBricks(colorBricks, topLeftX, topLeftY, canvasWidth, canvasHeight){
       canvasContext.fillStyle = colorBricks;
-      topLeftX = topLeftX + 30;
       canvasContext.fillRect(topLeftX, topLeftY, canvasWidth, canvasHeight);
-      topLeftX = topLeftX + 5;
-      canvasContext.fillRect(topLeftX+100, topLeftY, canvasWidth, canvasHeight);
-      topLeftX = topLeftX + 5;
-      canvasContext.fillRect(topLeftX+200, topLeftY, canvasWidth, canvasHeight);
-      topLeftX = topLeftX + 5;
-      canvasContext.fillRect(topLeftX+300, topLeftY, canvasWidth, canvasHeight);
-      topLeftX = topLeftX + 5;
-      canvasContext.fillRect(topLeftX+400, topLeftY, canvasWidth, canvasHeight);
-      topLeftX = topLeftX + 5;
-      canvasContext.fillRect(topLeftX+500, topLeftY, canvasWidth, canvasHeight);
-      topLeftX = topLeftX + 5;
-      canvasContext.fillRect(topLeftX+600, topLeftY, canvasWidth, canvasHeight);
     }
 
     function padding(colorPadding, topLeftX, topLeftY, paddingW, paddingH){
