@@ -129,11 +129,23 @@
 
 
     function drawBricks(colorBricks, topLeftX, topLeftY, canvasWidth, canvasHeight){
-      padding("white", 0,0 , 20,20 );
       canvasContext.fillStyle = colorBricks;
+      topLeftX = topLeftX + 30;
       canvasContext.fillRect(topLeftX, topLeftY, canvasWidth, canvasHeight);
-      padding("white", 0,0 , 20,20 );
+      topLeftX = topLeftX + 5;
+      canvasContext.fillRect(topLeftX+100, topLeftY, canvasWidth, canvasHeight);
+      topLeftX = topLeftX + 5;
+      canvasContext.fillRect(topLeftX+200, topLeftY, canvasWidth, canvasHeight);
+      topLeftX = topLeftX + 5;
+      canvasContext.fillRect(topLeftX+300, topLeftY, canvasWidth, canvasHeight);
+      topLeftX = topLeftX + 5;
+      canvasContext.fillRect(topLeftX+400, topLeftY, canvasWidth, canvasHeight);
+      topLeftX = topLeftX + 5;
+      canvasContext.fillRect(topLeftX+500, topLeftY, canvasWidth, canvasHeight);
+      topLeftX = topLeftX + 5;
+      canvasContext.fillRect(topLeftX+600, topLeftY, canvasWidth, canvasHeight);
     }
+
     function padding(colorPadding, topLeftX, topLeftY, paddingW, paddingH){
       canvasContext.fillStyle = colorPadding;
       canvasContext.fillRect(topLeftX, topLeftY, paddingW, paddingH);
