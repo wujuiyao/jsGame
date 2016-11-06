@@ -23,6 +23,7 @@
     const PADDLE_THICKNESS = 15;
     const PADDLE_WIDTH = 120;
     const PADDLE_DIST_FROM_EDGE = 60;
+
     const BRICK_THICKNESS = 20;
     const BRICK_WIDTH = 100;
     const BRICK_PADDING = 5;
@@ -32,7 +33,6 @@
 
    /*Functions*/
     window.onload = function(){
-
       var framesPerSecond = 30;
       setInterval(updateAll, 1000/framesPerSecond);
       canvas = document.getElementById('game-Canvas');
@@ -42,7 +42,6 @@
       var canvasW = canvas.width;
 
       canvas.addEventListener("mousemove", updateMousePos);
-
     }
 
     function updateMousePos(evt){
@@ -50,15 +49,14 @@
       var root = document.documentElement;
       mouseX = evt.clientX - rect.left - root.scrollLeft;
       mouseY = evt.clientY - rect.top - root.scrollTop;
-
       paddleX = mouseX - PADDLE_WIDTH/2;
-      paddleX;
-    }
+     }
 
     function updateAll(){
       move();
       draw();
     }
+
     /*canvas move*/
     function move(){
       ballX += ballSpeedX;
@@ -81,22 +79,47 @@
         resetBall();
       }
 
+      /*ball position*/
       var paddleTopEdgeY = canvas.height - PADDLE_DIST_FROM_EDGE;
       var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
       var paddleLeftEdgeX = paddleX;
       var paddleRightEdgeX = paddleLeftEdgeX + PADDLE_WIDTH;
+      var bounceBack = -1;
+
+
+
       if(ballY > paddleTopEdgeY &&
          ballY < paddleBottomEdgeY &&
          ballX > paddleLeftEdgeX &&
          ballX < paddleRightEdgeX){
-         var bounceBack;
          reflectBall(bounceBack);
 
          var centerOfPaddleX = paddleX + PADDLE_WIDTH/2;
          var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
          ballSpeedX = ballDistFromPaddleCenterX * 0.35;
       }
+
+      /*make bricks disappear*/
+      var brickVisible = true;
+
+      var brickBottomEdge = canvas.height - 560;
+      var firstBrickLeftEdge = 0;
+      var firstBrickRightEdge = canvas.width;
+
+      if(ballY < brickBottomEdge &&
+          ballX > firstBrickLeftEdge &&
+          ballX < firstBrickRightEdge &&
+          brickVisible  == true){
+            reflectBall(bounceBack);
+            brickVisible = false;
+       }
+
+       if(brickVisible == false){
+         noReflectBall();
+         console.log("brickVisible = false");
+       }
     }
+
 
     function resetBall(){
       var delay=500;
@@ -104,6 +127,9 @@
         ballX = 100;
         ballY = 100;
       }, delay);
+    }
+    function noReflectBall(){
+      ballSpeedY *= 1;
     }
 
     function reflectBall(reflect){
@@ -165,6 +191,7 @@
       canvasContext.fillStyle = colorCanvas;
       canvasContext.fillRect(topLeftX, topLeftY, canvasWidth, canvasHeight);
     }
+
     function ball(colorBall, centerX, centerY, radius){
       canvasContext.fillStyle = colorBall;
       canvasContext.beginPath();
