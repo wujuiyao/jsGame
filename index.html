@@ -27,14 +27,14 @@
     const BRICK_THICKNESS = 20;
     const BRICK_WIDTH = 100;
     const BRICK_PADDING = 5;
+	const BRICK_COUNT = 4;
+	  
     var paddleX;
     var mouseX;
-    var mouseY
-
-    var brick0 = true;
-    var brick1 = true;
-    var brick2 = true;
-    var brick3 = true;
+    var mouseY;
+	  
+	var brickGrid = new Array(BRICK_COUNT);
+	var brickGridTotal = brickGrid.length;
 
    /*Functions*/
     window.onload = function(){
@@ -47,6 +47,8 @@
       var canvasW = canvas.width;
 
       canvas.addEventListener("mousemove", updateMousePos);
+		
+	  brickReset();
     }
 
     function updateMousePos(evt){
@@ -61,6 +63,12 @@
       move();
       draw();
     }
+	
+	function brickReset(){
+		for(var i=0; i < BRICK_COUNT; i++){
+			brickGrid[i] = true;
+		}
+	}
 
     /*canvas move*/
     function move(){
@@ -151,24 +159,16 @@
       colorText("x:"+mouseX+", "+"y:"+mouseY, mouseX, mouseY, "yellow","11px Verdana");
       /*Bricks*/
       drawBricks();
-
-
     }
 
 
     function drawBricks(){
-      if(brick0){
-        fillRect('blue',BRICK_WIDTH*0,0,BRICK_WIDTH-2,BRICK_THICKNESS-2);
-      }
-      if(brick1){
-        fillRect('blue',BRICK_WIDTH*1, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
-      }
-      if(brick2){
-        fillRect('blue',BRICK_WIDTH*2, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
-      }
-      if(brick3){
-        fillRect('blue',BRICK_WIDTH*3, 0, BRICK_WIDTH-2, BRICK_THICKNESS-2);
-      }
+		
+	  for (var i = 0; i <= BRICK_COUNT; i++){
+		  if(brickGrid[i]){
+		  	fillRect('blue',BRICK_WIDTH*i,0,BRICK_WIDTH-2,BRICK_THICKNESS-2);
+		  }
+	  }  
     }
 
     function padding(colorPadding, topLeftX, topLeftY, paddingW, paddingH){
