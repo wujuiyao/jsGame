@@ -29,6 +29,7 @@ const BRICK_WIDTH = 100;
 const BRICK_PADDING = 5;
 const BRICK_COUNT = 8;
 const BRICK_GAP = 2;
+const BRICK_COUNT_ROW = 4;
 
 var paddleX;
 var mouseX;
@@ -66,7 +67,9 @@ function updateAll(){
 
 function brickReset(){
 	for(var i=0; i < BRICK_COUNT; i++){
-		brickGrid[i] = true;
+		for(var j=0; j < BRICK_COUNT_ROW; j++){
+			brickGrid[i] = true;
+		}
 	}// end of brick count
 }// end of brickReset
 
@@ -146,10 +149,12 @@ function draw(){
 
 function drawBricks(){	
   for (var i = 0; i <= BRICK_COUNT; i++){
-	if(brickGrid[i]){
-		fillRect('blue',BRICK_WIDTH*i,0,BRICK_WIDTH-BRICK_GAP,BRICK_THICKNESS-2);
-	}	
-  }  
+	  for(var j = 0; j <= BRICK_COUNT_ROW; j++){
+		if(brickGrid[i] == true){
+			fillRect('blue',BRICK_WIDTH*i,BRICK_THICKNESS*j,BRICK_WIDTH-BRICK_GAP,BRICK_THICKNESS-2);
+		}
+	  }//end of Brick Count Row
+  }//end of Brick Count
 }
 
 function padding(colorPadding, topLeftX, topLeftY, paddingW, paddingH){
